@@ -9,6 +9,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path("ckeditor5/", include('django_ckeditor_5.urls')),
     path('api/v1/', include('apps.blog.urls')),
+    path('api/v1/', include('apps.magazine.urls')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
