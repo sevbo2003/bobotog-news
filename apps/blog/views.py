@@ -52,3 +52,12 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer = PostSerializer(post.category.post_set.all().exclude(id=post.id), many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+    @action(detail=False, methods=['get'])
+    def featured_posts(self, request):
+        pagination = self.paginate_queryset(Post.objects.filter(is_featured=True))
+        if pagination is not None:
+            serializer = PostSerializer(pagination, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = PostSerializer(Post.objects.filter(is_featured=True), many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
