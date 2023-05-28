@@ -1,9 +1,10 @@
 site_name: config
+theme: material
 site_description: News backend for Bobotog'
 repo_url: https://github.com/sevbo2003/bobotog-news
 site_dir: site
 copyright: Copyright &copy; 2020, <a href="https://github.com/sevbo2003">sevbo2003</a>.
-dev_addr: 0.0.0.0:8001
+dev_addr: 0.0.0.0:8000
 
 nav:
   - Home: 'index.md'

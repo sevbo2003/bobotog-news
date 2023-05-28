@@ -23,7 +23,7 @@ class Common(Configuration):
         'django_filters',            # for filtering rest endpoints
 
         # Your apps
-
+        'apps.blog',
     )
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
