@@ -16,14 +16,10 @@ class Category(models.Model):
         verbose_name_plural = _('Kategoriyalar')
 
 
-    translations = TranslatedFields(
-        title=models.CharField(max_length=300, verbose_name=_('Sarlavha')),
-        description = models.CharField(max_length=1000, verbose_name=_('Maqola haqida qisqacha')),
-        content = CKEditor5Field(config_name='extends', verbose_name=_('Maqola')),
-    )
-    categories = models.ManyToManyField(Category, verbose_name=_('Kategoriyalar'))
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_('Muallif'))
-    image = models.ImageField(upload_to='post_images', verbose_name=_('Rasm'))
+class Post(models.Model):
+    title=models.CharField(max_length=300, verbose_name=_('Sarlavha')),
+    content = CKEditor5Field(config_name='extends', verbose_name=_('Maqola')),
+    categories = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_('Kategoriya')),
     created_at = models.DateTimeField(verbose_name=_('Created at'))
     updated_at = models.DateTimeField(verbose_name=_('Updated at'))
     is_featured = models.BooleanField(default=False, verbose_name=_('Maxus post'))
@@ -42,3 +38,16 @@ class Category(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
             super(Post, self).save(*args, **kwargs)
+
+
+class PostImage(models.Model):
+    image = models.ImageField(upload_to='post_images', verbose_name=_('Rasm'), null=True, blank=True)
+    video = models.FileField(upload_to='post_videos', verbose_name=_('Video'), null=True, blank=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name=_('Maqola'))
+
+    def __str__(self):
+        return self.post.title
+    
+    class Meta:
+        verbose_name = _('Maqola rasm')
+        verbose_name_plural = _('Maqola rasmlari')
