@@ -25,6 +25,7 @@ class Common(Configuration):
 
         # Your apps
         'apps.blog',
+        'apps.magazine',
     )
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
