@@ -61,3 +61,12 @@ class PostViewSet(viewsets.ModelViewSet):
         serializer = PostSerializer(Post.objects.filter(is_featured=True), many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+    @action(detail=False, methods=['get'])
+    def dolzarb_posts(self, request):
+        pagination = self.paginate_queryset(Post.objects.filter(dolzarb=True))
+        if pagination is not None:
+            serializer = PostSerializer(pagination, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = PostSerializer(Post.objects.filter(dolzarb=True), many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
