@@ -18,10 +18,11 @@ class Common(Configuration):
 
 
         # Third party apps
-        'django_ckeditor_5',
+        'django_ckeditor_5',         # rich text editor
         'rest_framework',            # utilities for rest apis
         'rest_framework.authtoken',  # token authentication
         'django_filters',            # for filtering rest endpoints
+        'drf_yasg',                  # for swagger
 
         # Your apps
         'apps.blog',
