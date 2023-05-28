@@ -5,8 +5,8 @@ from django.utils.text import slugify
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=255, verbose_name=_('Kategoriya nomi')),
-    image = models.ImageField(upload_to='category_images', verbose_name=_('Rasm')),
+    name = models.CharField(max_length=255, verbose_name=_('Kategoriya nomi'))
+    image = models.ImageField(upload_to='category_images', verbose_name=_('Rasm'))
 
     def __str__(self):
         return self.name
@@ -17,11 +17,12 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    title=models.CharField(max_length=300, verbose_name=_('Sarlavha')),
-    content = CKEditor5Field(config_name='extends', verbose_name=_('Maqola')),
-    categories = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_('Kategoriya')),
-    created_at = models.DateTimeField(verbose_name=_('Created at'))
-    updated_at = models.DateTimeField(verbose_name=_('Updated at'))
+    title = models.CharField(max_length=300, verbose_name=_('Sarlavha'))
+    content = CKEditor5Field(config_name='extends', verbose_name=_('Maqola'))
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_('Kategoriya'))
+    created_at = models.DateTimeField(verbose_name=_('Created at'), auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name=_('Updated at'), auto_now=True)
+    dolzarb = models.BooleanField(default=False, verbose_name=_('Dolzarb'))
     is_featured = models.BooleanField(default=False, verbose_name=_('Maxus post'))
     slug = models.SlugField(max_length=255, verbose_name=_('Slug'))
     views = models.IntegerField(default=0, verbose_name=_('Ko\'rilganlar soni'))
@@ -33,11 +34,6 @@ class Post(models.Model):
         verbose_name = _('Maqola')
         verbose_name_plural = _('Maqolalar')
         ordering = ['-created_at']
-    
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.title)
-            super(Post, self).save(*args, **kwargs)
 
 
 class PostImage(models.Model):

@@ -104,10 +104,12 @@ venv.bak/
 /static
 
 # django migrations
-/migrations
+db.sqlite3
 
 # django media
 /media
 
 # mypy
 .mypy_cache/
+
+migrations/
