@@ -214,6 +214,7 @@ class Common(Configuration):
     # SESSION_COOKIE_DOMAIN = 'backend.stroymarkets.uz'
     SESSION_SAVE_EVERY_REQUEST = True
 
+    MAIN_DOMAIN = os.getenv('MAIN_DOMAIN', 'http://127.0.0.1:8000')
 
     # Ckeditor
     customColorPalette = [
