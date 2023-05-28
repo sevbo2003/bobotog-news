@@ -37,11 +37,6 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'category', 'created_at', 'updated_at', 'dolzarb', 'is_featured', 'slug',
                   'views', 'postimage_set']
     
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        data['postimage_set'] = PostImageSerializer(instance.postimage_set.all(), many=True).data
-        return data
-
 
 class PostRetrieveSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
