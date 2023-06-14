@@ -5,6 +5,7 @@ from django.utils.text import slugify
 
 
 class Category(models.Model):
+    id = models.UUIDField(primary_key=True, editable=False)
     name = models.CharField(max_length=255, verbose_name=_('Kategoriya nomi'))
     image = models.ImageField(upload_to='category_images', verbose_name=_('Rasm'))
 
@@ -17,6 +18,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+    id = models.UUIDField(primary_key=True, editable=False)
     title = models.CharField(max_length=300, verbose_name=_('Sarlavha'))
     content = CKEditor5Field(config_name='extends', verbose_name=_('Maqola'))
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_('Kategoriya'))
@@ -48,40 +50,3 @@ class PostImage(models.Model):
         verbose_name = _('Maqola rasm')
         verbose_name_plural = _('Maqola rasmlari')
 
-
-# [Unit]
-# Description=gunicorn daemon
-# Requires=gunicorn.socket
-# After=network.target
-
-# [Service]
-# User=express
-# Group=www-data
-# WorkingDirectory=/home/express/second-ielts
-# ExecStart=/home/express/second-ielts/venv/bin/gunicorn \
-#           --access-logfile - \
-#           --workers 3 \
-#           --bind unix:/run/gunicorn.sock \
-#           backend.wsgi:application
-
-# [Install]
-# WantedBy=multi-user.target
-
-
-# server {
-#     listen 80;
-#     server_name backend.expressielts.uz;
-
-#     location = /favicon.ico { access_log off; log_not_found off; }
-#     location /static/ {
-#         root /home/express/second-ielts;
-#     }
-#     location /media/ {
-#         root /home/express/second-ielts;
-#     }
-
-#     location / {
-#         include proxy_params;
-#         proxy_pass http://unix:/run/gunicorn.sock;
-#     }
-# }
