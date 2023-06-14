@@ -10,7 +10,7 @@ class CategorySerializer(serializers.ModelSerializer):
     
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data['image'] = settings.MAIN_DOMAIN + data['image']
+        data['image'] = data['image']
         return data
 
 
@@ -22,9 +22,9 @@ class PostImageSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         if data['image']:
-            data['image'] = settings.MAIN_DOMAIN + data['image']
+            data['image'] = data['image']
         if data['video']:
-            data['video'] = settings.MAIN_DOMAIN + data['video']
+            data['video'] = data['video']
         return data
 
 
