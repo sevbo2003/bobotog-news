@@ -47,3 +47,41 @@ class PostImage(models.Model):
     class Meta:
         verbose_name = _('Maqola rasm')
         verbose_name_plural = _('Maqola rasmlari')
+
+
+# [Unit]
+# Description=gunicorn daemon
+# Requires=gunicorn.socket
+# After=network.target
+
+# [Service]
+# User=express
+# Group=www-data
+# WorkingDirectory=/home/express/second-ielts
+# ExecStart=/home/express/second-ielts/venv/bin/gunicorn \
+#           --access-logfile - \
+#           --workers 3 \
+#           --bind unix:/run/gunicorn.sock \
+#           backend.wsgi:application
+
+# [Install]
+# WantedBy=multi-user.target
+
+
+# server {
+#     listen 80;
+#     server_name backend.expressielts.uz;
+
+#     location = /favicon.ico { access_log off; log_not_found off; }
+#     location /static/ {
+#         root /home/express/second-ielts;
+#     }
+#     location /media/ {
+#         root /home/express/second-ielts;
+#     }
+
+#     location / {
+#         include proxy_params;
+#         proxy_pass http://unix:/run/gunicorn.sock;
+#     }
+# }
