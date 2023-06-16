@@ -1,11 +1,12 @@
 from django.db import models
+import uuid
 from django.utils.translation import gettext_lazy as _
 from django_ckeditor_5.fields import CKEditor5Field
 from django.utils.text import slugify
 
 
 class Category(models.Model):
-    id = models.UUIDField(primary_key=True, editable=False)
+    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     name = models.CharField(max_length=255, verbose_name=_('Kategoriya nomi'))
     slug = models.SlugField(max_length=255, verbose_name=_('Slug'))
 
