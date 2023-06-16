@@ -7,14 +7,21 @@ from django.utils.text import slugify
 class Category(models.Model):
     id = models.UUIDField(primary_key=True, editable=False)
     name = models.CharField(max_length=255, verbose_name=_('Kategoriya nomi'))
-    image = models.ImageField(upload_to='category_images', verbose_name=_('Rasm'))
+    slug = models.SlugField(max_length=255, verbose_name=_('Slug'))
 
     def __str__(self):
         return self.name
 
     class Meta:
+        ordering = ['-id']
         verbose_name = _('Kategoriya')
         verbose_name_plural = _('Kategoriyalar')
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs)
+    
 
 
 class Post(models.Model):
