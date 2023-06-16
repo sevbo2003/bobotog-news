@@ -6,13 +6,8 @@ from django.conf import settings
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'name', 'image']
+        fields = ['id', 'name', 'slug']
     
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        data['image'] = data['image']
-        return data
-
 
 class PostImageSerializer(serializers.ModelSerializer):
     class Meta:
