@@ -18,8 +18,6 @@ class PostImageSerializer(serializers.ModelSerializer):
         data = super().to_representation(instance)
         if data['image']:
             data['image'] = data['image']
-        if data['video']:
-            data['video'] = data['video']
         return data
 
 

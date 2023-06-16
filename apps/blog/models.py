@@ -48,7 +48,7 @@ class Post(models.Model):
 
 class PostImage(models.Model):
     image = models.ImageField(upload_to='post_images', verbose_name=_('Rasm'), null=True, blank=True)
-    video = models.FileField(upload_to='post_videos', verbose_name=_('Video'), null=True, blank=True)
+    video = models.URLField(verbose_name=_('Video'), null=True, blank=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name=_('Maqola'))
 
     def __str__(self):
