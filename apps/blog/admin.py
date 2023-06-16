@@ -3,10 +3,11 @@ from apps.blog.models import Category, Post, PostImage
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'image')
-    list_display_links = ('name', 'image')
+    list_display = ('name', 'slug')
+    list_display_links = ('name', 'slug')
     search_fields = ('name',)
     list_per_page = 10
+    prepopulated_fields = {'slug': ('name',)}
 
 
 class PostImageInline(admin.TabularInline):
