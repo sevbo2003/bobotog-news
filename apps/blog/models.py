@@ -26,7 +26,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    id = models.UUIDField(primary_key=True, editable=False)
+    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
     title = models.CharField(max_length=300, verbose_name=_('Sarlavha'))
     content = CKEditor5Field(config_name='extends', verbose_name=_('Maqola'))
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_('Kategoriya'))
