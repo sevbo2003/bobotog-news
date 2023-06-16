@@ -63,10 +63,14 @@ class Common(Configuration):
         }
     else:
         DATABASES = {
-            'default': dj_database_url.config(
-                default='postgres://postgres:@postgres:5432/postgres',
-                conn_max_age=int(os.getenv('POSTGRES_CONN_MAX_AGE', 600))
-            )
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': os.getenv('POSTGRES_DB'),
+                'USER': os.getenv('POSTGRES_USER'),
+                'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+                'HOST': '127.0.0.1',
+                'PORT': 5432,
+            }
         }
 
     # General
