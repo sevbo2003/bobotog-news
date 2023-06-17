@@ -22,7 +22,8 @@ class Common(Configuration):
         'rest_framework',            # utilities for rest apis
         'rest_framework.authtoken',  # token authentication
         'django_filters',            # for filtering rest endpoints
-        'drf_yasg',                  # for swagger
+        'drf_yasg',             
+        'corsheaders',     # for swagger
 
         # Your apps
         'apps.blog',
@@ -31,6 +32,7 @@ class Common(Configuration):
 
     # https://docs.djangoproject.com/en/2.0/topics/http/middleware/
     MIDDLEWARE = (
+        'corsheaders.middleware.CorsMiddleware',
         'django.middleware.security.SecurityMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
@@ -73,6 +75,7 @@ class Common(Configuration):
             }
         }
 
+    CORS_ORIGIN_ALLOW_ALL = True
     # General
     APPEND_SLASH = True
     TIME_ZONE = 'Asia/Tashkent'
