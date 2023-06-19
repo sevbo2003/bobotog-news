@@ -2,6 +2,8 @@ from rest_framework import serializers
 from apps.blog.models import Category, Post, PostImage
 from django.conf import settings
 
+DOMAIN = "https://uzunpro.uz"
+
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,7 +19,7 @@ class PostImageSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         if data['image']:
-            data['image'] = data['image']
+            data['image'] = DOMAIN + data['image']
         return data
 
 
