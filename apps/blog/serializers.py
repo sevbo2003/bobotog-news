@@ -19,6 +19,8 @@ class PostImageSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         if data['image']:
+            if data['image'][0] == 'h':
+                return data
             data['image'] = DOMAIN + data['image']
         return data
 
