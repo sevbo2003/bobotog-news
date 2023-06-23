@@ -1,5 +1,8 @@
+from typing import Any
 from django.contrib import admin
+from django.http.request import HttpRequest
 from apps.blog.models import Category, Post, PostImage
+from django.forms import BaseInlineFormSet
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -13,6 +16,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class PostImageInline(admin.TabularInline):
     model = PostImage
     extra = 1
+    min_num = 1
 
 
 class PostAdmin(admin.ModelAdmin):
