@@ -41,5 +41,5 @@ class PostRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'title', 'category', 'content', 'created_at', 'updated_at', 'dolzarb', 'is_featured', 'slug',
+        fields = ['id', 'title', 'category','author', 'content', 'created_at', 'updated_at', 'dolzarb', 'is_featured', 'slug',
                   'views', 'postimage_set']
