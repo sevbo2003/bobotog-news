@@ -26,6 +26,7 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     http_method_names = ['get', 'head', 'options']
+    lookup_field = 'slug'
 
     def get_serializer_class(self):
         if self.action == 'retrieve':
