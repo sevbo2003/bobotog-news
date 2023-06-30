@@ -44,7 +44,7 @@ class PostViewSet(viewsets.ModelViewSet):
         return super().retrieve(request, *args, **kwargs)
     
     @action(detail=True, methods=['get'])
-    def related_posts(self, request, pk=None):
+    def related_posts(self, request, slug=None):
         post = self.get_object()
         pagination = self.paginate_queryset(post.category.post_set.all().exclude(id=post.id))
         if pagination is not None:
